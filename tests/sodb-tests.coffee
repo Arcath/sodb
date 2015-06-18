@@ -54,6 +54,7 @@ describe 'sodb', ->
   describe 'updating records', ->
     it 'should update a record from an entry', ->
       entry = db.where({name: 'david'})[0]
+      expect(entry.changed()).to.equal false
       entry.name = 'dave'
       expect(entry.changed()).to.equal true
 
@@ -82,4 +83,3 @@ describe 'sodb', ->
       expect(db.count()).to.equal 3
 
   describe 'caching', ->
-    

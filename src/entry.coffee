@@ -9,7 +9,8 @@ module.exports =
     changed: ->
       changed = false
       for key in Object.keys(@object)
-        changed = this[key] == @object[key] unless changed
+        unless this[key] == @object[key]
+          changed = true
 
       return changed
 
