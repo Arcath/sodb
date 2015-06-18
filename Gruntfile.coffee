@@ -28,6 +28,12 @@ module.exports = (grunt) ->
         },
         src: ['tests/*.coffee']
       },
+      testDocs: {
+        options: {
+          reporter: 'spec'
+        }
+        src: ['tests/docs-tests.js']
+      }
       coverage: {
         options: {
           reporter: 'mocha-lcov-reporter',
@@ -63,4 +69,5 @@ module.exports = (grunt) ->
   grunt.registerTask 'test', ['coffee:source', 'mochaTest:test']
   grunt.registerTask 'testapp', ['coffee', 'shell:testapp']
   grunt.registerTask 'testci', ['coffee:source', 'shell:jscover', 'mochaTest']
+  grunt.registerTask 'testDocs', ['coffee:source', 'mochaTest:testDocs']
   grunt.registerTask 'publish', ['coffee', 'shell:publish']
