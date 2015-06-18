@@ -18,6 +18,7 @@ module.exports =
       @lastInsertId += 1
       newId = @lastInsertId
       @objects[newId] = new Entry(object, newId)
+      return @unref @objects[newId]
 
     #
     # where(search..)
@@ -34,7 +35,17 @@ module.exports =
         compare = Object.keys(condition[field])[0]
         results = @runCondition(field, compare, condition[field][compare], results)
 
-      return results
+      return results.map @unref
+
+    #
+    # unref(entry)
+    #
+    # entry - an instance of Entry
+    #
+    # Creates a new instance of Entry copying the supplied, stops updates outside of the database from applying to objects
+    #
+    unref: (entry) ->
+      new Entry(entry.object, entry.___id)
 
     #
     # runCondition(field, compare, value, objects)
@@ -84,3 +95,35 @@ module.exports =
           search[key] = {is: search[key]}
 
       return search
+
+    #
+    # update(entry)
+    #
+    # entry - an instance of Entry
+    #
+    update: (entry) ->
+      if entry.changed()
+        entry.updateObject()
+        @objects[entry.___id] = entry
+
+      return entry
+
+    #
+    # remove(entry)
+    #
+    # entry - an instance of Entry
+    #
+    remove: (entry) ->
+      delete @objects[entry.___id]
+
+    #
+    # count()
+    #
+    # Checks the cache and then returns a count
+    #
+    count: ->
+      count = 0
+      for object in @objects
+        count += 1 if object
+
+      return count

@@ -50,3 +50,36 @@ describe 'sodb', ->
       results = db.where({eyes: 2}, {age: {lt: 25}})
       expect(results.length).to.equal 1
       expect(results[0].age).to.equal 20
+
+  describe 'updating records', ->
+    it 'should update a record from an entry', ->
+      entry = db.where({name: 'david'})[0]
+      entry.name = 'dave'
+      expect(entry.changed()).to.equal true
+
+      results = db.where({name: 'dave'})
+      expect(results.length).to.equal 0
+
+      db.update(entry)
+
+      results = db.where({name: 'dave'})
+      expect(results.length).to.equal 1
+
+  describe 'deleteing records', ->
+    [toDelete] = []
+    beforeEach ->
+      db.add({name: 'bob'})
+      toDelete = db.lastInsertId
+
+    it 'should delete a record', ->
+      results = db.where({___id: toDelete})
+      expect(results.length).to.equal 1
+      db.remove(results[0])
+
+      results = db.where({___id: toDelete})
+      expect(results.length).to.equal 0
+      expect(db.objects.length).to.equal 4
+      expect(db.count()).to.equal 3
+
+  describe 'caching', ->
+    
