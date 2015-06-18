@@ -1,0 +1,21 @@
+#
+# Comparison methods
+#
+# All compare methods take the same arguments:
+#
+# field - the field to test
+# value - the value to compare to
+# objects - all the entries
+#
+module.exports =
+  is: (field, value, objects) ->
+    objects.filter (entry) ->
+      (entry[field] == value)
+
+  gt: (field, value, objects) ->
+    objects.filter (entry) ->
+      (entry[field] > value)
+
+  lt: (field, value, objects) ->
+    objects.filter (entry) ->
+      (entry[field] < value)
