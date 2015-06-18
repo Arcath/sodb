@@ -1,4 +1,4 @@
-# sodb
+# sodb [![Build Status](https://travis-ci.org/Arcath/sodb.svg?branch=master)](https://travis-ci.org/Arcath/sodb)
 
 Single Object Data Base
 
