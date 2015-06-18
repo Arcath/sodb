@@ -24,6 +24,9 @@ describe('Code Used in the Docs', function(){
     expect(results.length).to.equal(1);
     expect(results[0].height).to.equal(105);
 
+    david = db.findOne({name: 'david'})
+    expect(david.height).to.equal(105)
+
     results = db.where({height: {lt: 100}}, {eyes: 2});
     expect(results.length).to.equal(1);
     expect(results[0].name).to.equal('jorge');

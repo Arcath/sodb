@@ -40,6 +40,10 @@ describe 'sodb', ->
       results = db.where({name: ['kevin', 'david']})
       expect(results.length).to.equal 2
 
+    it 'should find one', ->
+      kevin = db.findOne({name: 'kevin'})
+      expect(kevin.age).to.equal 30
+
   describe 'compares', ->
     it 'should support greater than', ->
       results = db.where({eyes: 2}, {age: {gt: 25}})

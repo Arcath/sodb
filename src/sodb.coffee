@@ -38,6 +38,16 @@ module.exports =
       return results.map @unref
 
     #
+    # findOne(search...)
+    #
+    # serach - search objects
+    #
+    # returns the first result from where() called with the same args
+    #
+    findOne: ->
+      @where.apply(this, arguments)[0]
+
+    #
     # unref(entry)
     #
     # entry - an instance of Entry
