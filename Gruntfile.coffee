@@ -55,7 +55,7 @@ module.exports = (grunt) ->
         }
 
         jscover: {
-          command: "#{path.join(__dirname, 'node_modules', '.bin', 'jscover')} lib lib-cov"
+          command: "#{path.join(__dirname, 'node_modules', '.bin', 'jscover')} --format=LCOV lib lib-cov"
         }
     }
 
@@ -68,6 +68,6 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'test', ['coffee:source', 'mochaTest:test']
   grunt.registerTask 'testapp', ['coffee', 'shell:testapp']
-  grunt.registerTask 'testci', ['coffee:source', 'shell:jscover', 'mochaTest']
+  grunt.registerTask 'testci', ['coffee:source', 'shell:jscover', 'mochaTest', 'coveralls']
   grunt.registerTask 'testDocs', ['coffee:source', 'mochaTest:testDocs']
   grunt.registerTask 'publish', ['coffee', 'shell:publish']
