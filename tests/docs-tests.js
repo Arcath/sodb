@@ -12,7 +12,7 @@ describe('Code Used in the Docs', function(){
     tdb.add({name: 'bob', gender: 'm'});
 
     bob = tdb.findOne({name: 'bob'});
-    bob.gender // m
+    expect(bob.gender).to.equal('m');
   })
 
   it('should add the data', function(){
