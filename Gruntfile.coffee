@@ -35,7 +35,7 @@ module.exports = (grunt) ->
       }
       coverage: {
         options: {
-          reporter: 'mocha-lcov-reporter',
+          reporter: 'mocha-lcov-reporter'
           require: 'coffee-script/register'
           captureFile: 'lib-cov/lcov.txt'
           quiet: true
