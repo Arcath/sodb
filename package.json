@@ -11,7 +11,8 @@
     "url": "https://github.com/Arcath/sodb"
   },
   "keywords": [
-    "searching", "database"
+    "searching",
+    "database"
   ],
   "author": "Adam Laycock",
   "license": "MIT",
@@ -31,5 +32,8 @@
     "jscover": "^1.0.0",
     "mocha": "^2.2.5",
     "mocha-lcov-reporter": "0.0.2"
+  },
+  "dependencies": {
+    "object-hash": "^0.8.0"
   }
 }

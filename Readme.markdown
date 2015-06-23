@@ -13,3 +13,4 @@ npm install sodb --save
  - [Creating a Database](docs/creating_a_database.markdown)
  - [Finding Data](docs/finding_data.markdown)
  - [Updating and Removing Data](docs/updating_and_removing_data.markdown)
+ - [Caching](docs/caching.markdown)

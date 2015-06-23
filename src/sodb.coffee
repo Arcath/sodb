@@ -1,13 +1,25 @@
+Cache = require './cache'
 Compares = require './compares'
 Entry = require './entry'
+
+hash = require 'object-hash'
 
 module.exports =
   #
   #  Main class which is exported when this module is required
   #
   class sodb
-    objects: [] # New instances have no objects
+    objects: null
     lastInsertId: -1
+    cache: null
+    options: null
+
+    constructor: (@options = {}) ->
+      @objects = []
+      @options.cache ||= false
+      @dbRevision = 0
+
+      @cache = new Cache(@options.cache)
 
     #
     #  add(object)
@@ -18,6 +30,10 @@ module.exports =
       @lastInsertId += 1
       newId = @lastInsertId
       @objects[newId] = new Entry(object, newId)
+
+      if @options.cache
+        @dbRevision += 1
+
       return @unref @objects[newId]
 
     #
@@ -28,6 +44,10 @@ module.exports =
     where: ->
       args = Array.prototype.slice.call(arguments)
       search = args.map(@expandQuery)
+
+      @cache.hit hash.sha1(search), @objectHash, => @findResults(search)
+
+    findResults: (search) ->
       results = @objects
 
       for condition in search
@@ -116,6 +136,9 @@ module.exports =
         entry.updateObject()
         @objects[entry.___id] = entry
 
+        if @options.cache
+          @dbRevision += 1
+
       return entry
 
     #
@@ -125,6 +148,9 @@ module.exports =
     #
     remove: (entry) ->
       delete @objects[entry.___id]
+
+      if @options.cache
+        @dbRevision += 1
 
     #
     # count()
