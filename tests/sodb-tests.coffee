@@ -1,7 +1,11 @@
 path = require 'path'
 
 expect = require('chai').expect
-sodb = require path.join(__dirname, '..')
+
+if process.coverage == true
+  sodb = require path.join(__dirname, '..', 'lib-cov', 'sodb.js')
+else
+  sodb = require path.join(__dirname, '..')
 
 for caching in [true, false]
   describe "sodb with caching #{caching}", ->

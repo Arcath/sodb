@@ -25,7 +25,7 @@ module.exports = (grunt) ->
           reporter: 'spec',
           require: 'coffee-script/register'
         },
-        src: ['tests/*.coffee']
+        src: ['tests/*-tests.coffee']
       },
       testDocs: {
         options: {
@@ -40,7 +40,7 @@ module.exports = (grunt) ->
           captureFile: 'lib-cov/lcov.txt'
           quiet: true
         },
-        src: ['lib-cov/*.js']
+        src: ['tests/coverage.coffee']
       }
     },
 
