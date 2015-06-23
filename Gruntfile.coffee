@@ -25,7 +25,7 @@ module.exports = (grunt) ->
           reporter: 'spec',
           require: 'coffee-script/register'
         },
-        src: ['tests/*-tests.coffee']
+        src: ['tests/*.coffee']
       },
       testDocs: {
         options: {
@@ -40,7 +40,7 @@ module.exports = (grunt) ->
           captureFile: 'lib-cov/lcov.txt'
           quiet: true
         },
-        src: ['tests/coverage.coffee']
+        src: ['lib-cov/tests/*-tests.coffee']
       }
     },
 
@@ -54,7 +54,7 @@ module.exports = (grunt) ->
         }
 
         jscover: {
-          command: "#{path.join(__dirname, 'node_modules', '.bin', 'jscover')} --format=LCOV lib lib-cov"
+          command: "#{path.join(__dirname, 'node_modules', '.bin', 'jscover')} --format=LCOV lib lib-cov && cp -r ./tests ./lib-cov/tests"
         }
 
         coveralls: {

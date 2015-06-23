@@ -1,8 +1,8 @@
 path = require 'path'
 expect = require('chai').expect
 
-if process.coverage == true
-  Cache = require path.join(__dirname, '..', 'lib-cov', 'cache.js')
+if /lib-cov/.test(__dirname)
+  Cache = require path.join(__dirname, '..', 'cache.js')
 else
   Cache = require path.join(__dirname, '..', 'lib', 'cache.js')
 

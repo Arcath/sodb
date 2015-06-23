@@ -2,8 +2,8 @@ path = require 'path'
 
 expect = require('chai').expect
 
-if process.coverage == true
-  sodb = require path.join(__dirname, '..', 'lib-cov', 'sodb.js')
+if /lib-cov/.test(__dirname)
+  sodb = require path.join(__dirname, '..', 'sodb.js')
 else
   sodb = require path.join(__dirname, '..')
 
