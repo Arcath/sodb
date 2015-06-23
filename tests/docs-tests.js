@@ -6,6 +6,15 @@ expect = require('chai').expect;
 db = new sodb();
 
 describe('Code Used in the Docs', function(){
+  it('should work like in the readme', function(){
+    tdb = new sodb();
+
+    tdb.add({name: 'bob', gender: 'm'});
+
+    bob = tdb.findOne({name: 'bob'});
+    bob.gender // m
+  })
+
   it('should add the data', function(){
     db.add({name: 'david', height: 105, eyes: 2});
     db.add({name: 'stuart', height: 94, eyes: 1});
