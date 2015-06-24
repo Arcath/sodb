@@ -173,3 +173,14 @@ module.exports =
         count += 1 if object
 
       return count
+
+    toJSON: ->
+      JSON.stringify(@objects)
+
+    @buildFromJSON: (json) ->
+      objects = JSON.parse(json)
+      db = new sodb()
+      for object in objects
+        db.objects[object.___id] = object
+
+      return db

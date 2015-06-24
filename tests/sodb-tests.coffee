@@ -119,3 +119,21 @@ for caching in [true, false]
       if caching
         it 'should have a dbrevision of not 0', ->
           expect(db.dbRevision).not.to.equal 0
+
+describe 'JSON', ->
+  [db, json] = []
+
+  before ->
+    db = new sodb()
+    db.add({foo: 'bar'})
+    db.add({foo: 'widget'})
+
+  it 'should dump to json', ->
+    json = db.toJSON()
+    expect(json).to.equal '[{"object":{"foo":"bar"},"___id":0,"foo":"bar"},{"object":{"foo":"widget"},"___id":1,"foo":"widget"}]'
+
+  it 'should _restore_ from json', ->
+    ndb = sodb.buildFromJSON(json)
+
+    expect(ndb.count()).to.equal(2)
+    expect(ndb.objects.length).to.equal(2)
