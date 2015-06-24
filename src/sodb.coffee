@@ -41,12 +41,22 @@ module.exports =
     #
     # serach - search objects
     #
+    # Builds the search array and then checks the cache for the 
+    #
     where: ->
       args = Array.prototype.slice.call(arguments)
       search = args.map(@expandQuery)
 
       @cache.hit hash.sha1(search), @dbRevision, => @findResults(search)
 
+    #
+    # findResults(search)
+    #
+    # search - array of search objects
+    #
+    # Finds the search results for the given search array.
+    # Only called if the cache needs a new value.
+    #
     findResults: (search) ->
       results = @objects
 
