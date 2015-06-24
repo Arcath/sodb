@@ -7,15 +7,27 @@ if /lib-cov/.test(__dirname)
 else
   sodb = require path.join(__dirname, '..')
 
+cacheValue = true
+
 for caching in [true, false]
   describe "sodb with caching #{caching}", ->
     [db] = []
 
     before ->
-      db = new sodb({cache: caching})
+      db = new sodb({cache: cacheValue})
+
+    after ->
+      cacheValue = false
 
     it 'should have no entires in a new db', ->
       expect(db.objects.length).to.equal 0
+
+    it 'should have the cache set', ->
+      expect(db.options.cache).to.equal cacheValue
+
+    if caching
+      it 'should have a dbrevision of 0', ->
+        expect(db.dbRevision).to.equal 0
 
     describe 'adding records', ->
       it 'should add an id property', ->
@@ -73,7 +85,13 @@ for caching in [true, false]
         results = db.where({name: 'dave'})
         expect(results.length).to.equal 0
 
+        if cacheValue
+          dbrev = db.dbRevision
+
         db.update(entry)
+
+        if cacheValue
+          expect(db.dbRevision).to.equal dbrev + 1
 
         results = db.where({name: 'dave'})
         expect(results.length).to.equal 1
@@ -93,3 +111,7 @@ for caching in [true, false]
         expect(results.length).to.equal 0
         expect(db.objects.length).to.equal 4
         expect(db.count()).to.equal 3
+
+      if caching
+        it 'should have a dbrevision of not 0', ->
+          expect(db.dbRevision).not.to.equal 0

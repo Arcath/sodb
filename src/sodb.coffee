@@ -45,7 +45,7 @@ module.exports =
       args = Array.prototype.slice.call(arguments)
       search = args.map(@expandQuery)
 
-      @cache.hit hash.sha1(search), @objectHash, => @findResults(search)
+      @cache.hit hash.sha1(search), @dbRevision, => @findResults(search)
 
     findResults: (search) ->
       results = @objects
