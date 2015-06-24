@@ -41,7 +41,7 @@ module.exports =
     #
     # serach - search objects
     #
-    # Builds the search array and then checks the cache for the 
+    # Builds the search array and then checks the cache for the given search object
     #
     where: ->
       args = Array.prototype.slice.call(arguments)
