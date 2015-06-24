@@ -9,6 +9,7 @@ The search object can take a few forms depending on what you want to find:
 ```javascript
 {name: 'kevin'} // Will be expanded to is (see next line)
 {name: {is: 'kevin'}} // name is kevin
+{name: {isnot: 'kevin'}} // name is not kevin
 {height: {gt: 100}} // height is greater than 100
 {height: {lt: 90}} // height is less than 90
 {eyes: {is: [1, 2]}} // eyes is 1 OR 2

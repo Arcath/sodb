@@ -75,6 +75,10 @@ for caching in [true, false]
         expect(results.length).to.equal 1
         expect(results[0].age).to.equal 20
 
+      it 'should support isnot', ->
+        results = db.where({name: {isnot: 'kevin'}})
+        expect(results.length).to.equal 2
+
     describe 'updating records', ->
       it 'should update a record from an entry', ->
         entry = db.where({name: 'david'})[0]
