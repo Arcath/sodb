@@ -14,6 +14,12 @@ module.exports =
     cache: null
     options: null
 
+    #
+    # constructor(options)
+    #
+    # options - a hash of options currently takes:
+    #         - cache - true/false use caching features
+    #
     constructor: (@options = {}) ->
       @objects = []
       @options.cache ||= false
@@ -174,9 +180,21 @@ module.exports =
 
       return count
 
+    #
+    # toJSON()
+    #
+    # Returns a JSON string of the @objects array
+    #
     toJSON: ->
       JSON.stringify(@objects)
 
+    #
+    # #buildFromJSON(json)
+    #
+    # json - json string to parse
+    #
+    # Class Method, called as sodb.buildFromJSON(json). Builds a new database and returns it.
+    #
     @buildFromJSON: (json) ->
       objects = JSON.parse(json)
       db = new sodb()

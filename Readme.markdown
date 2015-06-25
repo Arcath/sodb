@@ -1,5 +1,5 @@
-# sodb [![Build Status](https://travis-ci.org/Arcath/sodb.svg?branch=master)](https://travis-ci.org/Arcath/sodb) [![Coverage Status](https://coveralls.io/repos/Arcath/sodb/badge.svg)](https://coveralls.io/r/Arcath/sodb) [![Dependency Status](https://david-dm.org/arcath/sodb.svg)](https://david-dm.org/arcath/sodb)
-[![devDependency Status](https://david-dm.org/arcath/sodb/dev-status.svg)](https://david-dm.org/arcath/sodb#info=devDependencies)
+# sodb
+[![Build Status](https://travis-ci.org/Arcath/sodb.svg?branch=master)](https://travis-ci.org/Arcath/sodb) [![Coverage Status](https://coveralls.io/repos/Arcath/sodb/badge.svg)](https://coveralls.io/r/Arcath/sodb) [![Dependency Status](https://david-dm.org/arcath/sodb.svg)](https://david-dm.org/arcath/sodb) [![devDependency Status](https://david-dm.org/arcath/sodb/dev-status.svg)](https://david-dm.org/arcath/sodb#info=devDependencies)
 
 Single Object Data Base
 
