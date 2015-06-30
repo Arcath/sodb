@@ -199,6 +199,9 @@ module.exports =
       objects = JSON.parse(json)
       db = new sodb()
       for object in objects
-        db.objects[object.___id] = object
+        if object == null
+          db.objects.push null
+        else
+          db.objects[object.___id] = object
 
       return db

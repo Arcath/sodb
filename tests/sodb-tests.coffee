@@ -127,13 +127,17 @@ describe 'JSON', ->
     db = new sodb()
     db.add({foo: 'bar'})
     db.add({foo: 'widget'})
+    db.add({foo: 'deleted'})
+
+    record = db.findOne({foo: 'deleted'})
+    db.remove record
 
   it 'should dump to json', ->
     json = db.toJSON()
-    expect(json).to.equal '[{"object":{"foo":"bar"},"___id":0,"foo":"bar"},{"object":{"foo":"widget"},"___id":1,"foo":"widget"}]'
+    expect(json).to.equal '[{"object":{"foo":"bar"},"___id":0,"foo":"bar"},{"object":{"foo":"widget"},"___id":1,"foo":"widget"},null]'
 
   it 'should _restore_ from json', ->
     ndb = sodb.buildFromJSON(json)
 
     expect(ndb.count()).to.equal(2)
-    expect(ndb.objects.length).to.equal(2)
+    expect(ndb.objects.length).to.equal(3)
