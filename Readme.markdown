@@ -1,4 +1,6 @@
 # sodb
+
+[![Join the chat at https://gitter.im/Arcath/sodb](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Arcath/sodb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](https://travis-ci.org/Arcath/sodb.svg?branch=master)](https://travis-ci.org/Arcath/sodb) [![Coverage Status](https://coveralls.io/repos/Arcath/sodb/badge.svg)](https://coveralls.io/r/Arcath/sodb) [![Dependency Status](https://david-dm.org/arcath/sodb.svg)](https://david-dm.org/arcath/sodb) [![devDependency Status](https://david-dm.org/arcath/sodb/dev-status.svg)](https://david-dm.org/arcath/sodb#info=devDependencies)
 
 Single Object Data Base
