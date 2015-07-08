@@ -20,6 +20,14 @@ module.exports =
     objects.filter (entry) ->
       (entry[field] < value)
 
+  gte: (field, value, objects) ->
+    objects.filter (entry) ->
+      (entry[field] >= value)
+
+  lte: (field, value, objects) ->
+    objects.filter (entry) ->
+      (entry[field] <= value)
+
   isnot: (field, value, objects) ->
     objects.filter (entry) ->
       (entry[field] != value)
