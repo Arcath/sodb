@@ -2,10 +2,7 @@ path = require 'path'
 
 expect = require('chai').expect
 
-if /lib-cov/.test(__dirname)
-  sodb = require path.join(__dirname, '..', 'sodb.js')
-else
-  sodb = require path.join(__dirname, '..')
+sodb = require path.join(__dirname, '..', 'src', 'sodb')
 
 cacheValue = true
 

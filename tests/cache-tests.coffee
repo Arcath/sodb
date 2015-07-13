@@ -1,11 +1,7 @@
 path = require 'path'
 expect = require('chai').expect
 
-if /lib-cov/.test(__dirname)
-  Cache = require path.join(__dirname, '..', 'cache.js')
-else
-  Cache = require path.join(__dirname, '..', 'lib', 'cache.js')
-
+Cache = require path.join(__dirname, '..', 'src', 'cache')
 
 cache = new Cache(true)
 
