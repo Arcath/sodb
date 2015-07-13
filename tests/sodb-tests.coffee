@@ -38,10 +38,11 @@ for caching in [true, false]
 
     describe 'finding records', ->
       before ->
-        db.add({name: 'stuart', age: 20, eyes: 2})
         db.add({name: 'kevin', age: 30, eyes: 2})
+        db.add({name: 'tim', age: 30, eyes: 2})
+        db.add({name: 'stuart', age: 20, eyes: 2})
 
-        expect(db.lastInsertId).to.equal 2
+        expect(db.lastInsertId).to.equal 3
 
       it 'should find records', ->
         results = db.where({name: 'kevin'})
@@ -51,7 +52,7 @@ for caching in [true, false]
       it 'should find records using and', ->
         results = db.where({eyes: 2}, {age: 30})
         expect(results[0].age).to.equal 30
-        expect(results.length).to.equal 1
+        expect(results.length).to.equal 2
 
       it 'should find records using or', ->
         results = db.where({name: ['kevin', 'david']})
@@ -64,7 +65,7 @@ for caching in [true, false]
     describe 'compares', ->
       it 'should support greater than', ->
         results = db.where({eyes: 2}, {age: {gt: 25}})
-        expect(results.length).to.equal 1
+        expect(results.length).to.equal 2
         expect(results[0].age).to.equal 30
 
       it 'should support less than', ->
@@ -74,7 +75,7 @@ for caching in [true, false]
 
       it 'should support greater than or equal', ->
         results = db.where({eyes: 2}, {age: {gte: 25}})
-        expect(results.length).to.equal 1
+        expect(results.length).to.equal 2
         expect(results[0].age).to.equal 30
 
       it 'should support less than or equal', ->
@@ -84,13 +85,13 @@ for caching in [true, false]
 
       it 'should support isnot', ->
         results = db.where({name: {isnot: 'kevin'}})
-        expect(results.length).to.equal 2
+        expect(results.length).to.equal 3
 
     describe 'result manipulation', ->
       it 'should order by', ->
-        ordered = db.order({name: {isnot: 'something new'}}, "name")
+        ordered = db.order({name: {isnot: 'something new'}}, "age")
 
-        expect(ordered[1].___id).to.equal 2
+        expect(ordered[1].___id).to.equal 3
 
     describe 'updating records', ->
       it 'should update a record from an entry', ->
@@ -126,8 +127,8 @@ for caching in [true, false]
 
         results = db.where({___id: toDelete})
         expect(results.length).to.equal 0
-        expect(db.objects.length).to.equal 4
-        expect(db.count()).to.equal 3
+        expect(db.objects.length).to.equal 5
+        expect(db.count()).to.equal 4
 
       if caching
         it 'should have a dbrevision of not 0', ->
