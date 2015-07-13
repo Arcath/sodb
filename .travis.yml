@@ -6,6 +6,7 @@ node_js:
 sudo: false
 script:
   - "grunt test"
+  - "grunt testDocs"
   - "grunt coverage"
 after_success: "grunt coveralls"
 
