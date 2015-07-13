@@ -56,6 +56,28 @@ module.exports =
       @cache.hit hash.sha1(search), @dbRevision, => @findResults(search)
 
     #
+    # order(search.., sort)
+    #
+    # search - search objects
+    # sort - the field to sort by
+    #
+    # Runs a where query and then sorts the results
+    #
+    order: ->
+      args = Array.prototype.slice.call(arguments)
+      sort = args.pop()
+
+      results = @where.apply(this, args)
+      @cache.hit hash.sha1([args, sort]), @dbRevision, ->
+        results.sort (a, b) ->
+          if a[sort] > b[sort]
+            return 1
+          else if a[sort] < b[sort]
+            return -1
+          else
+            return 0
+
+    #
     # findResults(search)
     #
     # search - array of search objects

@@ -25,6 +25,7 @@ bob.gender // m
 
  - [Creating a Database](docs/creating_a_database.markdown)
  - [Finding Data](docs/finding_data.markdown)
+ - [Working with Results](docs/working_with_results.markdown)
  - [Updating and Removing Data](docs/updating_and_removing_data.markdown)
  - [Caching](docs/caching.markdown)
 
