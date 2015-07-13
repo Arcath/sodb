@@ -66,13 +66,15 @@ module.exports =
       sort = args.pop()
 
       results = @where.apply(this, args)
-      results.sort (a, b) ->
-        if a[sort] > b[sort]
-          return 1
-        else if a[sort] < b[sort]
-          return -1
-        else
-          return 0
+      @cache.hit hash.sha1([args, sort]), @dbRevision, ->
+        results.sort (a, b) ->
+          if a[sort] > b[sort]
+            return 1
+          else if a[sort] < b[sort]
+            return -1
+          else
+            return 0
+
     #
     # findResults(search)
     #
