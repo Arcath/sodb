@@ -88,10 +88,9 @@ for caching in [true, false]
 
     describe 'result manipulation', ->
       it 'should order by', ->
-        results = db.where({name: {isnot: 'something new'}})
         ordered = db.order({name: {isnot: 'something new'}}, "name")
 
-        expect(results[0].___id).not.to.equal ordered[0].___id
+        expect(ordered[1].___id).to.equal 2
 
     describe 'updating records', ->
       it 'should update a record from an entry', ->
