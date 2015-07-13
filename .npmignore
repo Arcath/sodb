@@ -1,3 +1,4 @@
 src/
 tests/
 lib-cov/
+lcov.txt

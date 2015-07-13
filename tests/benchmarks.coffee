@@ -2,7 +2,7 @@ console.log 'Running benchmarks'
 
 path = require 'path'
 
-sodb = require path.join(__dirname, '..')
+sodb = require path.join(__dirname, '..', 'src', 'sodb')
 
 nocache = new sodb({cache: false})
 

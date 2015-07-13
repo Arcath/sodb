@@ -4,7 +4,9 @@ node_js:
   - "1.0"
   - "1.8"
 sudo: false
-script: "grunt testci"
+script:
+  - "grunt test"
+  - "grunt coverage"
 after_success: "grunt coveralls"
 
 notifications:
