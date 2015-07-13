@@ -41,6 +41,12 @@ describe('Code Used in the Docs', function(){
     expect(results[0].name).to.equal('jorge');
   });
 
+  it('should sort the data', function(){
+    heightOrder = db.order({eyes: 2}, 'height');
+    expect(heightOrder[0].name).to.equal('jorge');
+    expect(heightOrder.reverse()[0].name).to.equal('tim');
+  })
+
   it('should update the data', function(){
     david = db.where({name: 'david'})[0];
     expect(david.name).to.equal('david');

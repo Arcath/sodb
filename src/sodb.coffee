@@ -61,6 +61,8 @@ module.exports =
     # search - search objects
     # sort - the field to sort by
     #
+    # Runs a where query and then sorts the results
+    #
     order: ->
       args = Array.prototype.slice.call(arguments)
       sort = args.pop()
