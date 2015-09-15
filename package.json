@@ -36,6 +36,6 @@
     "mocha-lcov-reporter": "0.0.2"
   },
   "dependencies": {
-    "object-hash": "^0.8.0"
+    "object-hash": "^0.9.1"
   }
 }
