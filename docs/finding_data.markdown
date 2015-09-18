@@ -13,6 +13,7 @@ The search object can take a few forms depending on what you want to find:
 {height: {gt: 100}} // height is greater than 100
 {height: {lt: 90}} // height is less than 90
 {eyes: {is: [1, 2]}} // eyes is 1 OR 2
+{friends: {includes: 'kevin'}}  //friends array includes kevin
 
 results = db.where({name: 'david'}); // where name is david
 results.length // 1
@@ -20,6 +21,9 @@ results[0].height // 105
 
 david = db.findOne({name: 'david'})
 david.height // 105
+
+results = db.where({friends: {includes: 'jorge'}})
+results.length // 2
 ```
 
 Each additional search object refines the search before it so for example to find all minions under 100cm with 2 eyes:
