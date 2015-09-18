@@ -16,14 +16,14 @@ describe('Code Used in the Docs', function(){
   })
 
   it('should add the data', function(){
-    db.add({name: 'david', height: 105, eyes: 2});
-    db.add({name: 'stuart', height: 94, eyes: 1});
-    db.add({name: 'jerry', height: 105, eyes: 2});
-    db.add({name: 'jorge', height: 96, eyes: 2});
-    db.add({name: 'tim', height: 120, eyes: 2});
-    db.add({name: 'mark', height: 105, eyes: 2});
-    db.add({name: 'phil', height: 95, eyes: 1});
-    db.add({name: 'kevin', height: 6, eyes: 1});
+    db.add({name: 'david', height: 105, eyes: 2, friends: ['stuart', 'jerry']});
+    db.add({name: 'stuart', height: 94, eyes: 1, friends: ['david', 'jorge']});
+    db.add({name: 'jerry', height: 105, eyes: 2, friends: ['david', 'jorge']});
+    db.add({name: 'jorge', height: 96, eyes: 2, friends: ['stuart', 'jerry']});
+    db.add({name: 'tim', height: 120, eyes: 2, friends: ['mark']});
+    db.add({name: 'mark', height: 105, eyes: 2, friends: ['tim']});
+    db.add({name: 'phil', height: 95, eyes: 1, friends: ['kevin']});
+    db.add({name: 'kevin', height: 6, eyes: 1, friends: ['phil']});
 
     expect(db.count()).to.equal(8);
   });
@@ -39,6 +39,9 @@ describe('Code Used in the Docs', function(){
     results = db.where({height: {lt: 100}}, {eyes: 2});
     expect(results.length).to.equal(1);
     expect(results[0].name).to.equal('jorge');
+
+    results = db.where({friends: {includes: 'jorge'}})
+    expect(results.length).to.equal(2);
   });
 
   it('should sort the data', function(){
