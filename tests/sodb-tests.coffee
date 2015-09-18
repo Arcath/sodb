@@ -28,7 +28,7 @@ for caching in [true, false]
 
     describe 'adding records', ->
       it 'should add an id property', ->
-        db.add({name: 'david', age: 10, eyes: 1})
+        db.add({name: 'david', age: 10, eyes: 1, likes: ['bananas', 'helping']})
         expect(db.lastInsertId).to.equal 0
 
     describe 'the search object', ->
@@ -38,9 +38,9 @@ for caching in [true, false]
 
     describe 'finding records', ->
       before ->
-        db.add({name: 'kevin', age: 30, eyes: 2})
-        db.add({name: 'tim', age: 30, eyes: 2})
-        db.add({name: 'stuart', age: 20, eyes: 2})
+        db.add({name: 'kevin', age: 30, eyes: 2, likes: ['bananas', 'helping']})
+        db.add({name: 'tim', age: 30, eyes: 2, likes: ['bananas', 'helping']})
+        db.add({name: 'stuart', age: 20, eyes: 2, likes: ['bananas', 'helping']})
 
         expect(db.lastInsertId).to.equal 3
 
@@ -86,6 +86,10 @@ for caching in [true, false]
       it 'should support isnot', ->
         results = db.where({name: {isnot: 'kevin'}})
         expect(results.length).to.equal 3
+
+      it 'should support includes', ->
+        results = db.where({likes: {includes: 'bananas'}})
+        expect(results.length).to.equal 4
 
     describe 'result manipulation', ->
       it 'should order by', ->

@@ -31,3 +31,7 @@ module.exports =
   isnot: (field, value, objects) ->
     objects.filter (entry) ->
       (entry[field] != value)
+
+  includes: (field, value, objects) ->
+    objects.filter (entry) ->
+      (entry[field].indexOf(value) != -1)
