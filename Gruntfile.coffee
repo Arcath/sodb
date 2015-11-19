@@ -2,7 +2,7 @@ path = require 'path'
 
 module.exports = (grunt) ->
   grunt.loadNpmTasks('grunt-contrib-coffee')
-  #grunt.loadNpmTasks('grunt-mocha-test')
+  grunt.loadNpmTasks('grunt-mocha-test')
   grunt.loadNpmTasks('grunt-shell')
 
   grunt.initConfig
