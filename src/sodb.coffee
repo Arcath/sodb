@@ -221,9 +221,6 @@ module.exports =
       objects = JSON.parse(json)
       db = new sodb()
       for object in objects
-        if object == null
-          db.objects.push null
-        else
-          db.objects[object.___id] = object
+        db.objects.push object
 
       return db
