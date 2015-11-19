@@ -208,7 +208,7 @@ module.exports =
     # Returns a JSON string of the @objects array
     #
     toJSON: ->
-      JSON.stringify(@objects)
+      JSON.stringify({objects: @objects, lastInsertId: @lastInsertId})
 
     #
     # #buildFromJSON(json)
@@ -218,9 +218,12 @@ module.exports =
     # Class Method, called as sodb.buildFromJSON(json). Builds a new database and returns it.
     #
     @buildFromJSON: (json) ->
-      objects = JSON.parse(json)
+      data = JSON.parse(json)
       db = new sodb()
-      for object in objects
-        db.objects.push object
+      for object in data.objects
+        unless object == null
+          db.objects[object.___id] = object
+
+      db.lastInsertId = data.lastInsertId
 
       return db
