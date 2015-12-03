@@ -134,6 +134,10 @@ for caching in [true, false]
         expect(db.objects.length).to.equal 5
         expect(db.count()).to.equal 4
 
+      it 'should return all records', ->
+        results = db.all()
+        expect(results.length).to.equal db.count()
+
       if caching
         it 'should have a dbrevision of not 0', ->
           expect(db.dbRevision).not.to.equal 0

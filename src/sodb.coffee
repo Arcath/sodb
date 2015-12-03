@@ -203,6 +203,26 @@ module.exports =
       return count
 
     #
+    # all()
+    #
+    # returns all entries in the database via the cache and @findAll()
+    #
+    all: ->
+      @cache.hit hash.sha1('find-all'), @dbRevision, => @findAll()
+
+    #
+    # findAll()
+    #
+    # finds all the records in the db and returns them
+    #
+    findAll: ->
+      results = []
+      for object in @objects
+        results.push @unref(object) if object
+
+      return results
+
+    #
     # toJSON()
     #
     # Returns a JSON string of the @objects array
