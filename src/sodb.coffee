@@ -223,6 +223,28 @@ module.exports =
       return results
 
     #
+    # unique(field)
+    #
+    # returns an array of unique values for field via the cache
+    #
+    unique: (field) ->
+      @cache.hit hash.sha1("unique-#{field}"), @dbRevision, => @findUnique(field)
+
+    #
+    # findUnique(field)
+    #
+    # finds all the unique values for field.
+    #
+    findUnique: (field) ->
+      results = []
+      for object in @objects
+        if object
+          if results.indexOf(object[field]) == -1 and object[field] != undefined
+            results.push object[field]
+
+      return results
+
+    #
     # toJSON()
     #
     # Returns a JSON string of the @objects array

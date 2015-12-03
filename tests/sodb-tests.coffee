@@ -138,6 +138,11 @@ for caching in [true, false]
         results = db.all()
         expect(results.length).to.equal db.count()
 
+      it 'should return unique records', ->
+        db.add({name: 'agetester', age: 30})
+        results = db.unique('age')
+        expect(results.length).to.equal 3
+
       if caching
         it 'should have a dbrevision of not 0', ->
           expect(db.dbRevision).not.to.equal 0
