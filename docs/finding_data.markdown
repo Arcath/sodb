@@ -33,3 +33,18 @@ results = db.where({height: {lt: 100}}, {eyes: 2})
 results.length // 1
 results[0].name // jorge
 ```
+
+If you need all entries from the database you can fetch them through .all()
+
+```javascript
+results = db.all()
+results.length // 8
+```
+
+If you want to find all the unique values for a field you can use .unique()
+
+```javascript
+results = db.unique('eyes')
+results.length // 2
+results // [1, 2]
+```

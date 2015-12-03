@@ -42,6 +42,12 @@ describe('Code Used in the Docs', function(){
 
     results = db.where({friends: {includes: 'jorge'}})
     expect(results.length).to.equal(2);
+
+    results = db.all()
+    expect(results.length).to.equal(8)
+
+    results = db.unique('eyes')
+    expect(results.length).to.equal(2)
   });
 
   it('should sort the data', function(){

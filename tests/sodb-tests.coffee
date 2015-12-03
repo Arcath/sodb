@@ -62,6 +62,14 @@ for caching in [true, false]
         kevin = db.findOne({name: 'kevin'})
         expect(kevin.age).to.equal 30
 
+      it 'should return all records', ->
+        results = db.all()
+        expect(results.length).to.equal db.count()
+
+      it 'should return unique records', ->
+        results = db.unique('age')
+        expect(results.length).to.equal 3
+
     describe 'compares', ->
       it 'should support greater than', ->
         results = db.where({eyes: 2}, {age: {gt: 25}})
