@@ -14,6 +14,14 @@ module.exports =
       for key in Object.keys(@object)
         this[key] = @object[key]
 
+    keys: ->
+      keys = Object.keys(this)
+
+      delete keys[keys.indexOf('___id')]
+      delete keys[keys.indexOf('object')]
+
+      return keys
+
     #
     # changed()
     #
@@ -21,7 +29,7 @@ module.exports =
     #
     changed: ->
       changed = false
-      for key in Object.keys(@object)
+      for key in @keys()
         unless this[key] == @object[key]
           changed = true
 
@@ -33,5 +41,5 @@ module.exports =
     # sets all the object values to the ones on this instance (resets changed())
     #
     updateObject: ->
-      for key in Object.keys(@object)
+      for key in @keys()
         @object[key] = this[key]

@@ -126,6 +126,12 @@ for caching in [true, false]
         results = db.where({name: 'dave'})
         expect(results.length).to.equal 1
 
+      it 'should add additional fields', ->
+        entry = db.where({name: 'dave'})[0]
+        expect(entry.changed()).to.equal false
+        entry.foo = 'new'
+        expect(entry.changed()).to.equal true
+
     describe 'deleteing records', ->
       [toDelete] = []
       beforeEach ->
