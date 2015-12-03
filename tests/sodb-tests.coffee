@@ -67,7 +67,6 @@ for caching in [true, false]
         expect(results.length).to.equal db.count()
 
       it 'should return unique records', ->
-        db.add({name: 'agetester', age: 30})
         results = db.unique('age')
         expect(results.length).to.equal 3
 
