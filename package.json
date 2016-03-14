@@ -23,6 +23,7 @@
   "homepage": "https://github.com/Arcath/sodb",
   "devDependencies": {
     "benchmark": "^2.1.0",
+    "browserify": "^13.0.0",
     "chai": "^3.0.0",
     "coffee-coverage": "^1.0",
     "coffee-script": "^1.9.2",

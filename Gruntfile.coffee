@@ -49,6 +49,10 @@ module.exports = (grunt) ->
           command: 'npm publish'
         }
 
+        buildDist:{
+          command: "#{path.join('.', 'node_modules', '.bin', 'browserify')} support\\build.js -o dist\\sodb.js"
+        }
+
         coveralls: {
           command: "cat ./lcov.txt | #{path.join(__dirname, 'node_modules', '.bin', 'coveralls')}"
         }
@@ -66,4 +70,4 @@ module.exports = (grunt) ->
   grunt.registerTask 'test', ['shell:mocha']
   grunt.registerTask 'coverage', ['mochaTest:coverage', 'shell:coveralls']
   grunt.registerTask 'testDocs', ['coffee:source', 'mochaTest:testDocs']
-  grunt.registerTask 'publish', ['coffee', 'shell:publish']
+  grunt.registerTask 'publish', ['coffee', 'shell:publish', 'buildDist']
