@@ -99,6 +99,10 @@ for caching in [true, false]
         results = db.where({likes: {includes: 'bananas'}})
         expect(results.length).to.equal 4
 
+      it 'should support matches', ->
+        results = db.where({name: {matches: /kev/}})
+        expect(results.length).to.equal 1
+
     describe 'result manipulation', ->
       it 'should order by', ->
         ordered = db.order({name: {isnot: 'something new'}}, "age")

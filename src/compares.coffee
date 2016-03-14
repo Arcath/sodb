@@ -35,3 +35,7 @@ module.exports =
   includes: (field, value, objects) ->
     objects.filter (entry) ->
       (entry[field].indexOf(value) != -1)
+
+  matches: (field, value, objects) ->
+    objects.filter (entry) ->
+      (value.test entry[field])
