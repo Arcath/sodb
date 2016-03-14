@@ -70,4 +70,4 @@ module.exports = (grunt) ->
   grunt.registerTask 'test', ['shell:mocha']
   grunt.registerTask 'coverage', ['mochaTest:coverage', 'shell:coveralls']
   grunt.registerTask 'testDocs', ['coffee:source', 'mochaTest:testDocs']
-  grunt.registerTask 'publish', ['coffee', 'shell:publish', 'buildDist']
+  grunt.registerTask 'publish', ['coffee', 'shell:publish', 'shell:buildDist']

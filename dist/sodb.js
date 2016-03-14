@@ -74,6 +74,11 @@
       return objects.filter(function(entry) {
         return entry[field].indexOf(value) !== -1;
       });
+    },
+    matches: function(field, value, objects) {
+      return objects.filter(function(entry) {
+        return value.test(entry[field]);
+      });
     }
   };
 
