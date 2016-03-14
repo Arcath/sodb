@@ -1,27 +1,13 @@
 console.log 'Running benchmarks'
 
 path = require 'path'
+Benchmark = require 'benchmark'
 
 sodb = require path.join(__dirname, '..', 'src', 'sodb')
 
 nocache = new sodb({cache: false})
 
 yescache = new sodb({cache: true})
-
-toMS = (time) ->
-  time[0]/1000 + time[1]/1000000
-
-resultsFor = (set) ->
-  min = 1000000000000
-  max = 0
-  total = 0
-  for time in set
-    ms = toMS(time)
-    total += ms
-    max = ms if max < ms
-    min = ms if min > ms
-
-  console.log "Results min:#{min}ms, max:#{max}ms, avg:#{total/set.length}ms"
 
 console.log 'adding 1000 records to each'
 
@@ -30,45 +16,22 @@ for i in [1..1000]
   nocache.add(object)
   yescache.add(object)
 
-times = {
-  yes: {
-    fixed: []
-    random: []
-    },
-  no: {
-    fixed: []
-    random: []
-  }
-}
+it 'should be faster with a cache', (done) ->
+  @timeout(100000)
 
-console.log 'running 100 searches for fixed data with no cache'
-for i in [0..99]
-  start = process.hrtime()
-  results = nocache.where({number: 50})
-  times.no.fixed.push process.hrtime(start)
+  suite = new Benchmark.Suite
 
-resultsFor(times.no.fixed)
+  suite.add "with cache", ->
+    yescache.where({number: 50})
 
-console.log 'running 100 searches for fixed data with a cache'
-for i in [0..99]
-  start = process.hrtime()
-  results = yescache.where({number: 50})
-  times.yes.fixed.push process.hrtime(start)
+  suite.add "no cache", ->
+    nocache.where({number: 50})
 
-resultsFor(times.yes.fixed)
+  suite.on 'cycle', (event) ->
+    console.log(String(event.target));
 
-console.log 'running 10000 random searches with no cache'
-for i in [0..9999]
-  start = process.hrtime()
-  results = nocache.where({number: Math.floor((Math.random()*100)+1)})
-  times.no.random.push process.hrtime(start)
+  suite.on 'complete', ->
+    console.log('Fastest is ' + this.filter('fastest').map('name'))
+    done()
 
-resultsFor(times.no.random)
-
-console.log 'running 10000 random searches with a cache'
-for i in [0..9999]
-  start = process.hrtime()
-  results = yescache.where({number: Math.floor((Math.random()*100)+1)})
-  times.yes.random.push process.hrtime(start)
-
-resultsFor(times.yes.random)
+  suite.run({async: true})
