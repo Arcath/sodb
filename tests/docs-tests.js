@@ -40,6 +40,11 @@ describe('Code Used in the Docs', function(){
     expect(results.length).to.equal(1);
     expect(results[0].name).to.equal('jorge');
 
+    results = db.where({height: {lt: 100}});
+    expect(results.length).to.equal(4);
+    results2 = db.refineSearch(results, {eyes: 2});
+    expect(results2.length).to.equal(1);
+
     results = db.where({friends: {includes: 'jorge'}})
     expect(results.length).to.equal(2);
 

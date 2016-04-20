@@ -35,6 +35,15 @@ results.length // 1
 results[0].name // jorge
 ```
 
+You can refine a search later if you need to by using `refineSearch`
+
+```javascript
+results = db.where({height: {lt: 100}})
+results.length // 4
+results2 = db.refineSearch(results, {eyes: 2})
+results2.length //1
+```
+
 If you need all entries from the database you can fetch them through .all()
 
 ```javascript
