@@ -79,6 +79,9 @@
       return objects.filter(function(entry) {
         return value.test(entry[field]);
       });
+    },
+    func: function(field, value, objects) {
+      return value(field, objects);
     }
   };
 
@@ -211,15 +214,29 @@
     };
 
     sodb.prototype.findResults = function(search) {
-      var compare, condition, field, i, len, results;
-      results = this.objects;
+      var results;
+      results = this.runSearch(this.objects, search);
+      return results.map(this.unref);
+    };
+
+    sodb.prototype.runSearch = function(results, search) {
+      var compare, condition, field, i, len;
       for (i = 0, len = search.length; i < len; i++) {
         condition = search[i];
         field = Object.keys(condition)[0];
         compare = Object.keys(condition[field])[0];
         results = this.runCondition(field, compare, condition[field][compare], results);
       }
-      return results.map(this.unref);
+      return results;
+    };
+
+    sodb.prototype.refineSearch = function() {
+      var args, refined, results, search;
+      args = Array.prototype.slice.call(arguments);
+      results = args.shift();
+      search = args.map(this.expandQuery);
+      refined = this.runSearch(results, this.expandQuery(search));
+      return refined.map(this.unref);
     };
 
     sodb.prototype.findOne = function() {
