@@ -39,3 +39,6 @@ module.exports =
   matches: (field, value, objects) ->
     objects.filter (entry) ->
       (value.test entry[field])
+
+  func: (field, value, objects) ->
+    value(field, objects)

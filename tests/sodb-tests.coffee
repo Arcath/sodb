@@ -103,6 +103,14 @@ for caching in [true, false]
         results = db.where({name: {matches: /kev/}})
         expect(results.length).to.equal 1
 
+      it 'should support a function', ->
+        results = db.where({name: {func: (field, objects) ->
+          objects.filter (entry) ->
+            (entry[field] == entry[field])
+        }})
+
+        expect(results.length).to.equal db.count()
+
     describe 'result manipulation', ->
       it 'should order by', ->
         ordered = db.order({name: {isnot: 'something new'}}, "age")

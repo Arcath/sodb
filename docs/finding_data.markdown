@@ -16,7 +16,22 @@ The search object can take a few forms depending on what you want to find:
 {eyes: {is: [1, 2]}} // eyes is 1 OR 2
 {friends: {includes: 'kevin'}}  //friends array includes kevin
 
+// Run a function to compare objects
+{name: {func: function(field, objects){
+  return objects.filter(function(entry){
+    return entry[field] == "david"
+  })
+}}}
+
 results = db.where({name: 'david'}); // where name is david
+results.length // 1
+results[0].height // 105
+
+results = db.where({name: {func: function(field, objects){
+  return objects.filter(function(entry){
+    return entry[field] == "david"
+  })
+}}})
 results.length // 1
 results[0].height // 105
 
