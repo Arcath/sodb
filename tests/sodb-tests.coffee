@@ -156,6 +156,15 @@ for caching in [true, false]
         it 'should have a dbrevision of not 0', ->
           expect(db.dbRevision).not.to.equal 0
 
+    describe 'Results', ->
+      it 'should let you refine your results', ->
+        results = db.where({eyes: 2})
+
+        res = db.refineSearch(results, {age: 20})
+
+        expect(res.length).to.equal 1
+
+
 describe 'JSON', ->
   [db, json] = []
 

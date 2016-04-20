@@ -86,14 +86,38 @@ module.exports =
     # Only called if the cache needs a new value.
     #
     findResults: (search) ->
-      results = @objects
+      results = @runSearch(@objects, search)
 
+      return results.map @unref
+
+    #
+    # runSearch(results, search)
+    #
+    # results - the array of objects to search
+    # search - array of search objects
+    #
+    runSearch: (results, search) ->
       for condition in search
         field = Object.keys(condition)[0]
         compare = Object.keys(condition[field])[0]
         results = @runCondition(field, compare, condition[field][compare], results)
 
-      return results.map @unref
+      return results
+
+    #
+    # refineSearch(results, search...)
+    #
+    # results - results from a previous sodb query
+    # search... - search objects
+    #
+    refineSearch: ->
+      args = Array.prototype.slice.call(arguments)
+      results = args.shift()
+      search = args.map(@expandQuery)
+
+      refined = @runSearch(results, @expandQuery(search))
+
+      return refined.map @unref
 
     #
     # findOne(search...)
