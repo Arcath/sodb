@@ -61,6 +61,15 @@ describe('Code Used in the Docs', function(){
 
     results = db.unique('eyes')
     expect(results.length).to.equal(2)
+
+    db.addCompare('multiple', function(field, value, objects){
+      return objects.filter(function(entry){
+        return (entry[field] % value == 0)
+      })
+    })
+
+    results = db.where({eyes: {multiple: 2}})
+    expect(results.length).to.equal(5)
   });
 
   it('should sort the data', function(){

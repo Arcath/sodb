@@ -111,6 +111,16 @@ for caching in [true, false]
 
         expect(results.length).to.equal db.count()
 
+      describe 'Custom Compares', ->
+        it 'should let you add a compare', ->
+          db.addCompare 'multiple', (field, value, objects) ->
+            objects.filter (entry) ->
+              (entry[field] % value == 0)
+
+        it 'should let you use an added compare', ->
+          results = db.where({eyes: {multiple: 2}})
+          expect(results.length).to.equal 3
+
     describe 'result manipulation', ->
       it 'should order by', ->
         ordered = db.order({name: {isnot: 'something new'}}, "age")
@@ -171,7 +181,6 @@ for caching in [true, false]
         res = db.refineSearch(results, {age: 20})
 
         expect(res.length).to.equal 1
-
 
 describe 'JSON', ->
   [db, json] = []

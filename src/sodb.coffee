@@ -269,6 +269,14 @@ module.exports =
       return results
 
     #
+    # addCompare(name, function(field, value, entries))
+    #
+    # Adds a compare that can be quickly used like any other
+    #
+    addCompare: (name, func) ->
+      Compares[name] = func
+
+    #
     # toJSON()
     #
     # Returns a JSON string of the @objects array

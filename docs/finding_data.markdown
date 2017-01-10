@@ -73,3 +73,20 @@ results = db.unique('eyes')
 results.length // 2
 results // [1, 2]
 ```
+
+If you want to add a new compare so you can pass a value to your functions you can add one with the `.addCompare()` method.
+
+```javascript
+// Give your compare a name and define a function that takes:
+// - the field to compare
+// - the value to compare to
+// - the objects to compare
+ db.addCompare('multiple', function(field, value, objects){
+   return objects.filter(function(entry){
+     return (entry[field] % value == 0)
+   })
+ })
+
+results = db.where({eyes: {multiple: 2}})
+results.length // 5
+ ```
