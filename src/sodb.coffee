@@ -2,7 +2,7 @@ Cache = require './cache'
 Compares = require './compares'
 Entry = require './entry'
 
-hash = require 'object-hash'
+hash = require './hash'
 
 module.exports =
   #
