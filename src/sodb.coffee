@@ -285,15 +285,16 @@ module.exports =
       JSON.stringify({objects: @objects, lastInsertId: @lastInsertId})
 
     #
-    # #buildFromJSON(json)
+    # #buildFromJSON(json, options)
     #
     # json - json string to parse
+    # options - the options object for SODB, see SODB.new
     #
     # Class Method, called as sodb.buildFromJSON(json). Builds a new database and returns it.
     #
-    @buildFromJSON: (json) ->
+    @buildFromJSON: (json, options = {}) ->
       data = JSON.parse(json)
-      db = new sodb()
+      db = new sodb(options)
       for object in data.objects
         unless object == null
           db.objects[object.___id] = object
