@@ -70,6 +70,14 @@ for caching in [true, false]
         results = db.unique('age')
         expect(results.length).to.equal 3
 
+      it 'should get by id', ->
+        record = db.get(2)
+        expect(record.name).to.equal 'tim'
+
+      it 'should get the last record', ->
+        record = db.getLast()
+        expect(record.name).to.equal 'stuart'
+
     describe 'compares', ->
       it 'should support greater than', ->
         results = db.where({eyes: 2}, {age: {gt: 25}})

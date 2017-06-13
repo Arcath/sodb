@@ -269,6 +269,22 @@ module.exports =
       return results
 
     #
+    # get(id)
+    #
+    # Gets the record with the given id
+    #
+    get: (id) ->
+      return @findOne({___id: id})
+
+    #
+    # getLast()
+    #
+    # Gets the last inserted record
+    #
+    getLast: ->
+      return @get(@lastInsertId)
+
+    #
     # addCompare(name, function(field, value, entries))
     #
     # Adds a compare that can be quickly used like any other
