@@ -119,6 +119,16 @@ for caching in [true, false]
 
         expect(results.length).to.equal db.count()
 
+      it 'should support defined', ->
+        results = db.where({name: {defined: true}})
+
+        expect(results.length).to.equal db.count()
+
+        results = db.where({name: {defined: false}})
+
+        expect(results.length).to.equal 0
+
+
       describe 'Custom Compares', ->
         it 'should let you add a compare', ->
           db.addCompare 'multiple', (field, value, objects) ->

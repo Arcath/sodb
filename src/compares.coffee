@@ -42,3 +42,12 @@ module.exports =
 
   func: (field, value, objects) ->
     value(field, objects)
+
+  defined: (field, value, objects) ->
+    objects.filter (entry) ->
+      result = (entry[field] != undefined)
+
+      if(value)
+        return result
+      else
+        return !result
