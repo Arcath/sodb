@@ -13,6 +13,7 @@ module.exports =
     lastInsertId: -1
     cache: null
     options: null
+    index: null
 
     #
     # constructor(options)
@@ -24,6 +25,7 @@ module.exports =
       @objects = []
       @options.cache ||= false
       @dbRevision = 0
+      @index = {}
 
       @cache = new Cache(@options.cache)
 
@@ -39,6 +41,9 @@ module.exports =
 
       if @options.cache
         @dbRevision += 1
+
+      if @options.index
+        @index[object[@options.index]] = newId
 
       return @unref @objects[newId]
 
@@ -128,6 +133,9 @@ module.exports =
     #
     findOne: ->
       @where.apply(this, arguments)[0]
+
+    indexLookup: (key) ->
+      return @unref @objects[@index[key]]
 
     #
     # unref(entry)

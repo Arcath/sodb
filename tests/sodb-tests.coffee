@@ -78,6 +78,16 @@ for caching in [true, false]
         record = db.getLast()
         expect(record.name).to.equal 'stuart'
 
+    describe 'index', ->
+      it 'should create an index', ->
+        tdb = new sodb({index: 'name'})
+
+        tdb.add({name: 'dave', age: 10})
+
+        result = tdb.indexLookup('dave')
+
+        expect(result.age).to.equal 10
+
     describe 'compares', ->
       it 'should support greater than', ->
         results = db.where({eyes: 2}, {age: {gt: 25}})
