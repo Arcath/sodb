@@ -135,7 +135,10 @@ module.exports =
       @where.apply(this, arguments)[0]
 
     indexLookup: (key) ->
-      return @unref @objects[@index[key]]
+      if @objects[@index[key]]
+        return @unref @objects[@index[key]]
+      else
+        return undefined
 
     #
     # unref(entry)

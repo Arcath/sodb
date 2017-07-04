@@ -88,6 +88,15 @@ for caching in [true, false]
 
         expect(result.age).to.equal 10
 
+      it 'should return undefined if no lookup exists', ->
+        tdb = new sodb({index: 'name'})
+
+        tdb.add({name: 'dave', age: 10})
+
+        result = tdb.indexLookup('phil')
+
+        expect(result).to.equal undefined
+
     describe 'compares', ->
       it 'should support greater than', ->
         results = db.where({eyes: 2}, {age: {gt: 25}})
