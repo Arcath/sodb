@@ -1,14 +1,9 @@
 language: node_js
 node_js:
-  - "0.12"
-  - "1.0"
-  - "1.8"
+  - "node"
 sudo: false
 script:
-  - "grunt test"
-  - "grunt testDocs"
-  - "grunt coverage"
-after_success: "grunt coveralls"
+  - "npm run ci"
 
 notifications:
   webhooks:

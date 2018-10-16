@@ -3,3 +3,4 @@ lib-cov/
 lcov.txt
 lib/
 dist/
+coverage/
