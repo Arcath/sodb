@@ -1,6 +1,6 @@
 path = require('path');
 
-sodb = require(path.join(__dirname, '..'));
+sodb = require(path.join(__dirname, '..', 'lib', 'sodb.js'));
 
 const SODB = sodb.SODB
 const buildFromJSON = sodb.buildFromJSON
