@@ -3,9 +3,10 @@ import {getCompares, CompareFunction, Compares} from './compares'
 import {Entry, DefaultObject} from './entry'
 import {Hash} from './hash'
 
-export interface SODBOptions{
+export interface SODBOptions<T>{
   cache: boolean
   index?: string
+  data?: T[]
 }
 
 export type SearchInputs =
@@ -35,12 +36,12 @@ export class SODB<T = DefaultObject>{
   objects: Entry<T>[]
   lastInsertId: number
   cache: Cache
-  options: SODBOptions
+  options: SODBOptions<T>
   index: {[key: string]: number}
   dbRevision: number
   compares: Compares<T>
 
-  constructor(options: SODBOptions = {
+  constructor(options: SODBOptions<T> = {
     cache: false
   }){
     this.objects = []
@@ -51,6 +52,12 @@ export class SODB<T = DefaultObject>{
 
     this.cache = new Cache(this.options.cache)
     this.compares = getCompares<T>()
+
+    if(options.data){
+      options.data.forEach((entry) => {
+        this.add(entry)
+      })
+    }
   }
 
 
@@ -324,7 +331,7 @@ export class SODB<T = DefaultObject>{
   }
 }
 
-export const buildFromJSON = <T = DefaultObject>(json: string, options: SODBOptions) => {
+export const buildFromJSON = <T = DefaultObject>(json: string, options: SODBOptions<T>) => {
   let data = JSON.parse(json)
   let db = new SODB<T>(options)
   data.objects.forEach((object: {___id: number, object: T}) => { 

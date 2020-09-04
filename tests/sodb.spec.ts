@@ -45,6 +45,15 @@ caches.forEach((caching) => {
     expect(expanded.value).toBe('bob')
   })
 
+  it('should load objects from options', () => {
+    const testDb = new SODB({cache: false, data: [
+      {name: 'bob'},
+      {name: 'steve'}
+    ]})
+
+    expect(testDb.all().length).toBe(2)
+  })
+
   describe('finding records', () => {
     beforeEach(() => {
       db = new SODB({cache: caching})
