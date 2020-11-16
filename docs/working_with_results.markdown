@@ -5,7 +5,7 @@
 sodb can order your results ascendingly (_protip_ use `.reverse()` to get descending).
 
 ```javascript
-heightOrder = db.order('height', {eyes: 2});
+heightOrder = database.orderBy('height', {eyes: 2});
 heightOrder[0].name // jorge
 heightOrder.reverse()[0].name // tim
 ```

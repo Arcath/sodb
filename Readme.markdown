@@ -11,14 +11,19 @@ npm install sodb --save
 
 ## Usage
 
-```javascript
-sodb = require('sodb');
+```typescript
+import db from 'sodb'
 
-db = new sodb();
+interface Record{
+  name: string
+  gender: string
+}
 
-db.add({name: 'bob', gender: 'm'});
+const {add, findOne} = db<Record>()
 
-bob = db.findOne({name: 'bob'});
+add({name: 'bob', gender: 'm'})
+
+const bob = findOne({name: 'bob'})
 bob.gender // m
 ```
 
