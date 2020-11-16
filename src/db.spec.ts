@@ -1,8 +1,7 @@
 import {cacheKeyExists} from '@arcath/utils'
 import {SHA1} from 'crypto-js'
 
-
-import {db} from './db'
+import {db, fromJson} from './db'
 
 describe('DB', () => {
   it('should find one by id', () => {
@@ -192,5 +191,37 @@ describe('DB', () => {
     const kevin = database.lookup('kevin')
 
     expect(kevin.name).toBe('kevin')
+  })
+
+  it('should export and import', () => {
+    interface Minion{
+      name: string
+      age: number
+      eyes: number
+      likes: string[]
+    }
+
+    const records: Minion[] = [
+      {name: 'kevin', age: 30, eyes: 2, likes: ['bananas', 'helping']},
+      {name: 'tim', age: 30, eyes: 2, likes: ['helping']},
+      {name: 'stuart', age: 20, eyes: 2, likes: ['bananas', 'helping']}
+    ]
+
+    const database = db<Minion>(records)
+
+    database.remove(1)
+
+    expect(database.count()).toBe(2)
+    expect(database.count()).toBe(2)
+
+    const asJson = database.toJson()
+
+    const config = JSON.parse(asJson)
+
+    expect(config.entries).toHaveLength(3)
+
+    const restored = fromJson<Minion>(asJson)
+
+    expect(restored.count()).toBe(2)
   })
 })

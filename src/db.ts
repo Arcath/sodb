@@ -23,6 +23,8 @@ interface DB<T>{
   changed: (object: WithIndex<T>) => boolean
 
   count: () => number
+
+  toJson: () => string
 }
 
 type Primative = 
@@ -305,6 +307,15 @@ export const db = <T extends {}>(entries: T[] = [], dbOptions: DeepPartial<DBOpt
     return getCount()
   }
 
+  const toJson = (): string => {
+    console.dir(entries)
+
+    return JSON.stringify({
+      options,
+      entries
+    })
+  }
+
   return {
     add,
     update,
@@ -318,8 +329,23 @@ export const db = <T extends {}>(entries: T[] = [], dbOptions: DeepPartial<DBOpt
     refineSearch,
     unique,
     changed,
-    count
+    count,
+    toJson
   }
+}
+
+export const fromJson = <T>(json: string): DB<T> => {
+  const config = JSON.parse(json)
+
+  const database = db<T>(config.entries, config.options)
+
+  config.entries.forEach((entry: T, i: number) => {
+    if(entry === null){
+      database.remove(i)
+    }
+  })
+
+  return database
 }
 
 export default db
