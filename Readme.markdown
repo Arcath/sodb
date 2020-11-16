@@ -1,5 +1,5 @@
-# sodb
-[![Build Status](https://travis-ci.org/Arcath/sodb.svg?branch=master)](https://travis-ci.org/Arcath/sodb) [![Coverage Status](https://coveralls.io/repos/Arcath/sodb/badge.svg)](https://coveralls.io/r/Arcath/sodb) [![Dependency Status](https://david-dm.org/arcath/sodb.svg)](https://david-dm.org/arcath/sodb) [![devDependency Status](https://david-dm.org/arcath/sodb/dev-status.svg)](https://david-dm.org/arcath/sodb#info=devDependencies) [![Join the chat at https://gitter.im/Arcath/sodb](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Arcath/sodb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# SODB
+[![Build Status](https://travis-ci.org/Arcath/sodb.svg?branch=master)](https://travis-ci.org/Arcath/sodb) [![Coverage Status](https://coveralls.io/repos/Arcath/sodb/badge.svg)](https://coveralls.io/r/Arcath/sodb)
 
 Single Object Data Base
 
@@ -32,6 +32,7 @@ bob.gender // m
  - [Finding Data](docs/finding_data.markdown)
  - [Working with Results](docs/working_with_results.markdown)
  - [Updating and Removing Data](docs/updating_and_removing_data.markdown)
+ - [Indexing](docs/indexing.markdown)
  - [Caching](docs/caching.markdown)
 
 ## Contributing
@@ -40,7 +41,7 @@ Feel free to fork this repo and submit changes!
 
 Run `npm install` to install all the modules. Once that finishes run `grunt test` to run the tests and `grunt testDocs` to test that the code examples in the docs work.
 
-Please add/amend the documentation to reflect your changes and add any code you put into the documentation to `tests/doc-tests.js`.
+Please add/amend the documentation to reflect your changes and add any code you put into the documentation to `src/db.docs.spec.ts`
 
 When you fork sodb please:
 
