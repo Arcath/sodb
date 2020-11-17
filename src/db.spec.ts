@@ -79,6 +79,14 @@ describe('DB', () => {
     const notTims = database.where({name: {isnot: 'tim'}})
 
     expect(notTims).toHaveLength(2)
+
+    const oldest = database.max('age')
+
+    expect(oldest.name).toBe('tim')
+
+    const youngest = database.min('age')
+
+    expect(youngest.name).toBe('stuart')
   })
 
   it('should support custom compares', () => {

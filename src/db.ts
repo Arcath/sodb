@@ -16,6 +16,9 @@ interface DB<T>{
   where: (...searches: SearchObject<T>[]) => WithIndex<T>[]
   orderBy: <K extends keyof T>(field: K, ...searches: SearchObject<T>[]) => WithIndex<T>[]
 
+  min: <K extends keyof T>(field: K) => WithIndex<T>
+  max: <K extends keyof T>(field: K) => WithIndex<T>
+
   refineSearch: (objects: WithIndex<T>[], ...searches: SearchObject<T>[]) => WithIndex<T>[]
 
   unique: <K extends keyof T>(field: K) => T[K][]
@@ -213,7 +216,7 @@ export const db = <T extends {}>(entries: T[] = [], dbOptions: DeepPartial<DBOpt
 
     const key = "sodb-" + SHA1(JSON.stringify(searchObject)).toString() + "-order-" + field
 
-    return cacheKey(key, () => {
+    const cached = cacheKey(key, () => {
       return results.sort((a, b) => {
         if(a[field] > b[field]){
           return 1
@@ -224,6 +227,8 @@ export const db = <T extends {}>(entries: T[] = [], dbOptions: DeepPartial<DBOpt
         }
       })
     })
+
+    return [...cached]
   }
 
   const refineSearch = (objects: WithIndex<T>[], ...searchObject: SearchObject<T>[]) => {
@@ -307,9 +312,15 @@ export const db = <T extends {}>(entries: T[] = [], dbOptions: DeepPartial<DBOpt
     return getCount()
   }
 
-  const toJson = (): string => {
-    console.dir(entries)
+  const min = <K extends keyof T>(field: K): WithIndex<T> => {
+    return orderBy(field)[0]
+  }
 
+  const max = <K extends keyof T>(field: K): WithIndex<T> => {
+    return orderBy(field).reverse()[0]
+  }
+
+  const toJson = (): string => {
     return JSON.stringify({
       options,
       entries
@@ -330,7 +341,9 @@ export const db = <T extends {}>(entries: T[] = [], dbOptions: DeepPartial<DBOpt
     unique,
     changed,
     count,
-    toJson
+    toJson,
+    min,
+    max
   }
 }
 
