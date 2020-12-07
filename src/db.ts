@@ -1,7 +1,7 @@
 import {SHA1} from 'crypto-js'
 import {cacheKey, resetCache, defaults, DeepPartial, keys} from '@arcath/utils'
 
-interface DB<T>{
+export interface DB<T>{
   add: (object: T) => number
   update: (object: WithIndex<T>) => void
   remove: (id: number | WithIndex<T>) => void
