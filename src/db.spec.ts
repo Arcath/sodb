@@ -128,7 +128,7 @@ describe('DB', () => {
 
     const database = db<Minion>(records, {index: 'name'})
 
-    const kevin = database.lookup('kevin')
+    const kevin = database.lookup('kevin')!
 
     expect(database.changed(kevin)).toBe(false)
 
@@ -198,7 +198,12 @@ describe('DB', () => {
 
     const kevin = database.lookup('kevin')
 
-    expect(kevin.name).toBe('kevin')
+    expect(kevin).not.toBeUndefined()
+    expect(kevin!.name).toBe('kevin')
+
+    const fake = database.lookup('fake')
+
+    expect(fake).toBeUndefined()
   })
 
   it('should export and import', () => {

@@ -107,6 +107,6 @@ describe("Docs tests", () => {
 
     let david = database.lookup('david')
 
-    expect(david.name).toBe('david')
+    expect(david!.name).toBe('david')
   })
 })

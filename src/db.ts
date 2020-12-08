@@ -8,7 +8,7 @@ export interface DB<T>{
 
   all: () => WithIndex<T>[]
 
-  lookup: (value: Primative) => WithIndex<T>
+  lookup: (value: Primative) => WithIndex<T> | undefined
 
   findOneById: (id: number) => WithIndex<T> | undefined
   findOne: (...searches: SearchObject<T>[]) => WithIndex<T>
@@ -192,7 +192,13 @@ export const db = <T extends {}>(entries: T[] = [], dbOptions: DeepPartial<DBOpt
   }
 
   const lookup = (value: Primative) => {
-    return addIndex(index[value as any])
+    const wi = addIndex(index[value as any])
+
+    if(wi.__id === undefined){
+      return undefined
+    }
+
+    return wi
   }
 
   const findOne = (...searchObject: SearchObject<T>[]): WithIndex<T> => {
