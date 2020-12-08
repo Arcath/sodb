@@ -1,6 +1,6 @@
 {
   "name": "sodb",
-  "version": "3.0.0-pre2",
+  "version": "3.0.0-pre3",
   "description": "Single Object Database",
   "main": "lib/db.js",
   "scripts": {
