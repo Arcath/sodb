@@ -3,3 +3,6 @@ tests/
 lib-cov/
 dist/
 lcov.txt
+docs/
+coverage/
+.vscode/
