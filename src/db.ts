@@ -36,9 +36,9 @@ type Primative =
   number |
   Primative[]
 
-type WithIndex<T> = T & {__id: number}
+export type WithIndex<T> = T & {__id: number}
 
-type SearchObject<T> = {[P in keyof T]?: SearchQuery<T, P>}
+export type SearchObject<T> = {[P in keyof T]?: SearchQuery<T, P>}
 
 type SearchQuery<T, P extends keyof T> = 
   T[P] |
@@ -47,7 +47,7 @@ type SearchQuery<T, P extends keyof T> =
   FilterFunction<T, P>
 
 
-interface Filters<T>{
+export interface Filters<T>{
   is: FilterFunction<T>
   isnot: FilterFunction<T>
   gt: FilterFunction<T>
@@ -56,14 +56,14 @@ interface Filters<T>{
   lte: FilterFunction<T>
 }
 
-interface ArrayFilters<T>{
+export interface ArrayFilters<T>{
   includes: ArrayFilterFunction<T>
 }
 
-type FilterFunction<T, K extends keyof T = keyof T> = (entry: T, field: K, value: T[K]) => boolean
-type ArrayFilterFunction<T, K extends keyof T = keyof T> = (entry: T, field: K, value: Primative) => boolean
+export type FilterFunction<T, K extends keyof T = keyof T> = (entry: T, field: K, value: T[K]) => boolean
+export type ArrayFilterFunction<T, K extends keyof T = keyof T> = (entry: T, field: K, value: Primative) => boolean
 
-interface DBOptions<T>{
+export interface DBOptions<T>{
   /** Should the results of searches be cached? */
   cache: boolean
   /** The field to index on */
